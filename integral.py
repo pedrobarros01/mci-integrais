@@ -25,18 +25,18 @@ class Integral(ABC):
             self.limite_sup = limite_sup
             self.x = []
             self.criar_vetor_x()
-            self.quant_pontos = len(self.x) - 1
+            self.quant_pontos = int((self.limite_sup - self.limite_inf) / self.h)
 
     def saber_maior(self, x, y):
-        if x > y:
+        if abs(x) > abs(y):
             return x
         else:
             return y
     
     def criar_vetor_x(self):
         i = self.limite_inf
-        while i <= self.limite_sup:
-            self.x.append(i)
+        while round(i, 2 ) <= round(self.limite_sup, 2):
+            self.x.append(round(i, 2))
             i += self.h
         
     @abstractmethod

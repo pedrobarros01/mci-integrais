@@ -33,15 +33,24 @@ class IntegralTrapezio(Integral):
         return cte * (primeiro + soma + ultimo)
 
 if __name__ == '__main__':
-    int_trapezio = IntegralTrapezio(
+    int_trapezio_1_questao = IntegralTrapezio(
         limite_inf=0, 
         limite_sup=1, 
         h=0.1,
         func_integral=lambda x: x * math.sqrt(x**2 + 1),
         func_derivada_integral=lambda x: ((2 * math.pow(x, 3) + 3 * x)) / ((math.pow(x, 2) + 1) * (math.sqrt(x**2 + 1)))
         )
-    print(f'Erro Geral = {int_trapezio.erro_generalizado()}')
-    print(round(int_trapezio.integral(), 5))
+    print(f'Erro Geral = {int_trapezio_1_questao.erro_generalizado()}')
+    print(f'F(x) 1°q = {round(int_trapezio_1_questao.integral(), 5)}')
+
+    int_trapezio_2_questao = IntegralTrapezio(
+        limite_inf=0,
+        limite_sup=1,
+        h=0.02,
+        func_integral=lambda x: 1 / (0.25 - math.cos(x) + 1)
+    )
+    print(f'F(x) 2°q= {(int_trapezio_2_questao.integral())}')
+    
 
 
         

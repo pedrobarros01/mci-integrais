@@ -23,7 +23,7 @@ class IntegralTresOitavosSimpson(Integral):
         return abs(maior * parcela_1)
     
     def integral(self):
-        quant_x = len(self.x)
+        quant_x = len(self.x) - 1
         if quant_x % 2 == 0:
             for x in self.x:
                 self.y.append(self.func_integral(x))
@@ -67,14 +67,22 @@ class IntegralTresOitavosSimpson(Integral):
     
 
 if __name__ == '__main__':
-    int_3_8_simpson = IntegralTresOitavosSimpson(
+    int_3_8_simpson_1_questao = IntegralTresOitavosSimpson(
             limite_inf=0, 
             limite_sup=1, 
             h=0.1,
             func_integral=lambda x: x * math.sqrt(x**2 + 1),
-            func_derivada_integral=lambda x: ((2 * math.pow(x, 3) + 3 * x)) / ((math.pow(x, 2) + 1) * (math.sqrt(x**2 + 1)))
-
-            )
-    print(f'Erro Geral = {int_3_8_simpson.erro_generalizado()}')
-    print(round(int_3_8_simpson.integral(), 10))
+            func_derivada_integral=lambda x: (-15 * x) / ((math.pow(x, 2)+ 1) ** (7/2))
+           )
+    print(f'Erro Geral = {int_3_8_simpson_1_questao.erro_generalizado()}')
+    print(round(int_3_8_simpson_1_questao.integral(), 10))
+    int_3_8_simpson_2_questao = IntegralTresOitavosSimpson(
+        limite_inf=0,
+        limite_sup=1,
+        h=0.02,
+        func_integral=lambda x: 1 / (0.25 - math.cos(x) + 1),
+        func_derivada_integral=lambda x: (11.25 * math.pow(math.cos(x), 3)  - 9 * math.pow(math.cos(x), 4) - 6.25 * math.cos(2 * x) + 7.5 * math.cos(2 * x)* math.cos(x) - 9.453125 * math.cos(x) + 7.5625 * math.pow(math.cos(x), 2) +  3.75*math.sin(x)*math.sin(2*x) - 3 * math.sin(x) * math.cos(x) * math.sin(2*x) + 32.5 * math.pow(math.sin(x), 2)*math.cos(x) -30 * math.pow(math.cos(x), 2)*math.pow(math.sin(x), 2) - 2 * math.pow(math.cos(x), 2)*math.cos(2*x) - 24 *math.pow(math.sin(x), 4) + 6.25 *math.pow(math.sin(x), 2)) / (math.pow(-math.cos(x) + 1.25, 5))
+    )
+    print(f'Erro Geral = {int_3_8_simpson_2_questao.erro_generalizado()}')
+    print(f'F(x) = {(int_3_8_simpson_2_questao.integral())}')
         

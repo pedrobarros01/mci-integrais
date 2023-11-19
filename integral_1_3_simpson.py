@@ -38,12 +38,20 @@ class IntegralUmTercoSimpson(Integral):
 
 
 if __name__ == '__main__':
-    inte_1_3_simpson = IntegralUmTercoSimpson(
+    inte_1_3_simpson_1_questao = IntegralUmTercoSimpson(
             limite_inf=0, 
             limite_sup=1, 
             h=0.1, 
             func_integral=lambda x: x * math.sqrt(x**2 + 1),
             func_derivada_integral=lambda x: ((2 * math.pow(x, 3) + 3 * x)) / ((math.pow(x, 2) + 1) * (math.sqrt(x**2 + 1)))
         )
-    print(f'Erro Geral = {inte_1_3_simpson.erro_generalizado()}')
-    print(round(inte_1_3_simpson.integral(), 5))
+    #print(f'Erro Geral = {inte_1_3_simpson_1_questao.erro_generalizado()}')
+    print(f'F(x) 1° q = {round(inte_1_3_simpson_1_questao.integral(), 5)}')
+
+    int_1_3_simpson_2_questao = IntegralUmTercoSimpson(
+        limite_inf=0,
+        limite_sup=1,
+        h=0.02,
+        func_integral=lambda x: 1 / (0.25 - math.cos(x) + 1)
+    )
+    print(f'F(x) 2° q = {(int_1_3_simpson_2_questao.integral())}')

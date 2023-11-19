@@ -7,10 +7,17 @@ class IntegralUmTercoSimpson(Integral):
         
 
     def erro_generalizado(self):
-        return super().erro_generalizado()
+        derivada_4_grau_limite_inf = self.func_derivada_integral(self.limite_inf)
+        derivada_4_grau_limite_sup = self.func_derivada_integral(self.limite_sup)
+        maior = self.saber_maior(derivada_4_grau_limite_inf, derivada_4_grau_limite_sup)
+        parcela_1 = (self.h**4 / 180) * (self.limite_sup - self.limite_inf)
+        return abs(maior * parcela_1)
     
     def erro_simples(self):
-        return super().erro_simples()
+        derivada_4_grau_limite_inf = self.func_derivada_integral(self.limite_inf)
+        derivada_4_grau_limite_sup = self.func_derivada_integral(self.limite_sup)
+        maior = self.saber_maior(derivada_4_grau_limite_inf, derivada_4_grau_limite_sup)
+        return abs(-1 * (self.h ** 5 / 90) * maior)
     
     def integral(self):
         for x in self.x:
@@ -35,6 +42,8 @@ if __name__ == '__main__':
             limite_inf=0, 
             limite_sup=1, 
             h=0.1, 
-            func_integral=lambda x: x * math.sqrt(x**2 + 1)
-            )
+            func_integral=lambda x: x * math.sqrt(x**2 + 1),
+            func_derivada_integral=lambda x: ((2 * math.pow(x, 3) + 3 * x)) / ((math.pow(x, 2) + 1) * (math.sqrt(x**2 + 1)))
+        )
+    print(f'Erro Geral = {inte_1_3_simpson.erro_generalizado()}')
     print(round(inte_1_3_simpson.integral(), 5))

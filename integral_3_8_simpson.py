@@ -3,8 +3,8 @@ import math
 
 
 class IntegralTresOitavosSimpson(Integral):
-    def __init__(self, limite_inf: int = None, limite_sup: int = None, h: float = None, quant_pontos: int = None, x: list[float] = None) -> None:
-        super().__init__(limite_inf, limite_sup, h, quant_pontos, x)
+    def __init__(self, limite_inf: int = None, limite_sup: int = None, h: float = None, quant_pontos: int = None, x: list[float] = None, func_integral=None, func_derivada_integral=None) -> None:
+        super().__init__(limite_inf, limite_sup, h, quant_pontos, x, func_integral, func_derivada_integral)
 
     def erro_generalizado(self):
         return super().erro_generalizado()
@@ -12,18 +12,11 @@ class IntegralTresOitavosSimpson(Integral):
     def erro_simples(self):
         return super().erro_simples()
     
-    def funcao_derivada(self, x: int | float):
-        return super().funcao_derivada(x)
-    
-    def funcao_integral(self, x: int | float):
-        return x * math.sqrt(x**2 + 1)
-    
     def integral(self):
         quant_x = len(self.x)
-        
         if quant_x % 2 == 0:
             for x in self.x:
-                self.y.append(self.funcao_integral(x))
+                self.y.append(self.func_integral(x))
             primeiro = self.y.pop(0)
             ultimo = self.y.pop()
             cte = (3*self.h) / 8
@@ -42,7 +35,7 @@ class IntegralTresOitavosSimpson(Integral):
             b = self.x.pop()
             penultimo = self.x[-1]
             for x in self.x:
-                self.y.append(self.funcao_integral(x))
+                self.y.append(self.func_integral(x))
             primeiro = self.y.pop(0)
             ultimo = self.y.pop()
             cte = (3*self.h) / 8
@@ -57,13 +50,18 @@ class IntegralTresOitavosSimpson(Integral):
                     soma3x += (3 * self.y[i])
                     cont += 1
            
-            y_aux = self.funcao_integral(penultimo)
-            y_b = self.funcao_integral(b)
+            y_aux = self.func_integral(penultimo)
+            y_b = self.func_integral(b)
             int_1 = (self.h / 2) * (y_aux + y_b)
             return (cte * (primeiro + soma2x + soma3x + ultimo)) + int_1
     
 
 if __name__ == '__main__':
-    int_3_8_simpson = IntegralTresOitavosSimpson(limite_inf=0, limite_sup=1, h=0.1)
+    int_3_8_simpson = IntegralTresOitavosSimpson(
+            limite_inf=0, 
+            limite_sup=1, 
+            h=0.1,
+            func_integral=lambda x: x * math.sqrt(x**2 + 1)
+            )
     print(round(int_3_8_simpson.integral(), 10))
         

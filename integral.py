@@ -6,13 +6,18 @@ class Integral(ABC):
                  limite_sup:int = None, 
                  h: float = None, 
                  quant_pontos:int = None, 
-                 x: list[float] = None
+                 x: list[float] = None,
+                 func_integral = None,
+                 func_derivada_integral = None
                  ) -> None:
         self.y = []
+        self.func_integral = func_integral
+        self.func_derivada_integral = func_derivada_integral
         if h is None:
             self.x = x
             self.limite_inf = x[0]
             self.limite_sup =  x[-1]
+            self.quant_pontos = quant_pontos
             self.h = (self.limite_sup - self.limite_inf) / quant_pontos
         else:
             self.h = h
@@ -20,20 +25,20 @@ class Integral(ABC):
             self.limite_sup = limite_sup
             self.x = []
             self.criar_vetor_x()
+            self.quant_pontos = len(self.x) - 1
 
+    def saber_maior(self, x, y):
+        if x > y:
+            return x
+        else:
+            return y
+    
     def criar_vetor_x(self):
         i = self.limite_inf
         while i <= self.limite_sup:
             self.x.append(i)
-            i += self.h        
-    @abstractmethod
-    def funcao_integral(self, x: int | float):
-        pass
-
-    @abstractmethod
-    def funcao_derivada(self, x: int | float):
-        pass
-
+            i += self.h
+        
     @abstractmethod
     def erro_simples(self):
         pass

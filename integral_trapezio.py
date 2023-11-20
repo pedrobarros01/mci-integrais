@@ -47,8 +47,10 @@ if __name__ == '__main__':
         limite_inf=0,
         limite_sup=1,
         h=0.02,
-        func_integral=lambda x: 1 / (0.25 - math.cos(x) + 1)
+        func_integral=lambda x: 1 / (0.25 - math.cos(x) + 1),
+        func_derivada_integral=lambda x: (-1 * math.cos(x) * (-math.cos(x) + 1.25) - 2 * math.pow(math.sin(x), 2)) / ((-math.cos(x) + 1.25) ** 3)
     )
+    print(f'Erro geral = {int_trapezio_2_questao.erro_generalizado()}')
     print(f'F(x) 2°q= {(int_trapezio_2_questao.integral())}')
     
 

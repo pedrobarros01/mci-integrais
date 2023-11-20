@@ -23,8 +23,8 @@ class IntegralTresOitavosSimpson(Integral):
         return abs(maior * parcela_1)
     
     def integral(self):
-        quant_x = len(self.x) - 1
-        if quant_x % 2 == 0:
+        quant_x = len(self.x)
+        if quant_x % 3 == 0:
             for x in self.x:
                 self.y.append(self.func_integral(x))
             primeiro = self.y.pop(0)

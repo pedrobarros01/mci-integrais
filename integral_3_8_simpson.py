@@ -13,8 +13,6 @@ class IntegralTresOitavosSimpson(Integral):
         parcela_1 = (self.h**4 / 80) * (self.limite_sup - self.limite_inf)
         return abs(maior * parcela_1)
 
-
-
     def erro_simples(self):
         derivada_4_grau_limite_inf = self.func_derivada_integral(self.limite_inf)
         derivada_4_grau_limite_sup = self.func_derivada_integral(self.limite_sup)
@@ -75,7 +73,7 @@ if __name__ == '__main__':
             func_derivada_integral=lambda x: (-15 * x) / ((math.pow(x, 2)+ 1) ** (7/2))
            )
     print(f'Erro Geral = {int_3_8_simpson_1_questao.erro_generalizado()}')
-    print(round(int_3_8_simpson_1_questao.integral(), 10))
+    print(f'F(x) 1° q = {round(int_3_8_simpson_1_questao.integral(), 10)}')
     int_3_8_simpson_2_questao = IntegralTresOitavosSimpson(
         limite_inf=0,
         limite_sup=1,
@@ -84,5 +82,5 @@ if __name__ == '__main__':
         func_derivada_integral=lambda x: (11.25 * math.pow(math.cos(x), 3)  - 9 * math.pow(math.cos(x), 4) - 6.25 * math.cos(2 * x) + 7.5 * math.cos(2 * x)* math.cos(x) - 9.453125 * math.cos(x) + 7.5625 * math.pow(math.cos(x), 2) +  3.75*math.sin(x)*math.sin(2*x) - 3 * math.sin(x) * math.cos(x) * math.sin(2*x) + 32.5 * math.pow(math.sin(x), 2)*math.cos(x) -30 * math.pow(math.cos(x), 2)*math.pow(math.sin(x), 2) - 2 * math.pow(math.cos(x), 2)*math.cos(2*x) - 24 *math.pow(math.sin(x), 4) + 6.25 *math.pow(math.sin(x), 2)) / (math.pow(-math.cos(x) + 1.25, 5))
     )
     print(f'Erro Geral = {int_3_8_simpson_2_questao.erro_generalizado()}')
-    print(f'F(x) = {(int_3_8_simpson_2_questao.integral())}')
+    print(f'F(x) 2° q = {(int_3_8_simpson_2_questao.integral())}')
         
